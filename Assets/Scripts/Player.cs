@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
     private float moveSpeed = 7f;
+    private bool isWalking;
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Update()
     {
         Vector2 inputVector = new Vector2(0, 0);
@@ -28,6 +34,11 @@ public class Player : MonoBehaviour
         transform.position += moveDir * moveSpeed * Time.deltaTime;
         float rotatoSpeed = 10f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotatoSpeed);
+        isWalking = moveDir != Vector3.zero;
         inputVector = inputVector.normalized;
+    }
+    public bool IsWalking()
+    {
+        return isWalking;
     }
 }
