@@ -12,20 +12,10 @@ public class GameInput : MonoBehaviour
         gameInputAction = new GameInputAction();
         gameInputAction.Enable();
     }
-    public bool IsUpPressed()
+    public Vector2 GetInputVectorNormalized()
     {
-        return gameInputAction.Player.Up.IsPressed();
-    }
-    public bool IsDownPressed()
-    {
-        return gameInputAction.Player.Down.IsPressed();
-    }
-    public bool IsLeftPressed()
-    {
-        return gameInputAction.Player.Left.IsPressed();
-    }
-    public bool IsRightPressed()
-    {
-        return gameInputAction.Player.Right.IsPressed();
+        Vector2 inputVector = gameInputAction.Player.Move.ReadValue<Vector2>();
+        inputVector = inputVector.normalized;
+        return inputVector;
     }
 }
